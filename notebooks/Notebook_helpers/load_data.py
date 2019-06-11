@@ -18,12 +18,19 @@ def load_coral_data(complete=True, CV=True, convert_to_categorical=True):
         train = pd.read_csv("../Data/Modeling/Predictors_complete_train.txt", sep='\t', decimal=",")
         val = pd.read_csv("../Data/Modeling/Predictors_complete_val.txt", sep='\t', decimal=",")
         test = pd.read_csv("../Data/Modeling/Predictors_complete_test.txt", sep='\t', decimal=",")
+        train.drop(train.columns[[0, 1]], axis=1, inplace=True)
+        val.drop(val.columns[[0, 1]], axis=1, inplace=True)
+        test.drop(test.columns[[0, 1]], axis=1, inplace=True)
+        
     else:
         df = pd.read_csv("../Data/Hawaii_RegimesPredictors.txt", sep="\t", decimal=",")
         train = pd.read_csv("../Data/Modeling/Predictors_raw_train.txt", sep='\t', decimal=",")
         val = pd.read_csv("../Data/Modeling/Predictors_raw_val.txt", sep='\t', decimal=",")
         test = pd.read_csv("../Data/Modeling/Predictors_raw_test.txt", sep='\t', decimal=",")
-    
+        train.drop(train.columns[0], axis=1, inplace=True)
+        val.drop(val.columns[0], axis=1, inplace=True)
+        test.drop(test.columns[0], axis=1, inplace=True)
+        
     if convert_to_categorical:
         df = data_prep(df)
         train = data_prep(train)
@@ -38,10 +45,10 @@ def load_coral_data(complete=True, CV=True, convert_to_categorical=True):
     return df, train, val, test
 
 def get_features_and_response(df, with_feature_eng = False):
-    FIRST_PRED_IDX = 16
-    LAST_OG_PRED_IDX = 36
-    FIRST_FE_PRED_IDX = 41
-    LAST_FE_PRED_IDX = 46
+    FIRST_PRED_IDX = 14
+    LAST_OG_PRED_IDX = 34
+    FIRST_FE_PRED_IDX = 39
+    LAST_FE_PRED_IDX = 44
     if with_feature_eng:
         features =  df.iloc[:, np.r_[FIRST_PRED_IDX:LAST_OG_PRED_IDX, FIRST_FE_PRED_IDX:LAST_FE_PRED_IDX]]
         pred_names = features.columns
