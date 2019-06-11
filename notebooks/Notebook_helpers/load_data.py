@@ -35,3 +35,17 @@ def load_coral_data(complete=True, CV=True, convert_to_categorical=True):
         return df, train, test
     
     return df, train, val, test
+
+def get_features_and_response(df, with_feature_eng = False):
+    FIRST_PRED_IDX = 14
+    LAST_OG_PRED_IDX = 34
+    LAST_FE_PRED_IDX = 39
+    if with_feature_eng:
+        features = df.iloc[:, FIRST_PRED_IDX:LAST_FE_PRED_IDX]
+        pred_names = df.iloc[:, FIRST_PRED_IDX:LAST_FE_PRED_IDX].columns
+    else :
+        features = df.iloc[:, FIRST_PRED_IDX:LAST_OG_PRED_IDX]
+        pred_names = df.iloc[:,FIRST_PRED_IDX:LAST_OG_PRED_IDX].columns
+
+    response = df['Regime']
+    return features, response, pred_names
