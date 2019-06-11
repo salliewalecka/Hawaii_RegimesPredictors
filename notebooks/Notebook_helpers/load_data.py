@@ -1,5 +1,6 @@
 # File to read in the data in consistent splits and format
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 
 
@@ -37,12 +38,13 @@ def load_coral_data(complete=True, CV=True, convert_to_categorical=True):
     return df, train, val, test
 
 def get_features_and_response(df, with_feature_eng = False):
-    FIRST_PRED_IDX = 14
-    LAST_OG_PRED_IDX = 34
-    LAST_FE_PRED_IDX = 39
+    FIRST_PRED_IDX = 16
+    LAST_OG_PRED_IDX = 36
+    FIRST_FE_PRED_IDX = 41
+    LAST_FE_PRED_IDX = 46
     if with_feature_eng:
-        features = df.iloc[:, FIRST_PRED_IDX:LAST_FE_PRED_IDX]
-        pred_names = df.iloc[:, FIRST_PRED_IDX:LAST_FE_PRED_IDX].columns
+        features =  df.iloc[:, np.r_[FIRST_PRED_IDX:LAST_OG_PRED_IDX, FIRST_FE_PRED_IDX:LAST_FE_PRED_IDX]]
+        pred_names = features.columns
     else :
         features = df.iloc[:, FIRST_PRED_IDX:LAST_OG_PRED_IDX]
         pred_names = df.iloc[:,FIRST_PRED_IDX:LAST_OG_PRED_IDX].columns
