@@ -23,7 +23,7 @@ def evaluate_performance(test_y, test_pred, print_vals=True):
     if print_vals :
         count_misclassified = (test_y != test_pred).sum()
         print('Misclassified samples: {}'.format(count_misclassified))
-        accuracy = metrics.accuracy_score(test_y, test_pred)    
+        accuracy = metrics.accuracy_score(test_y, test_pred)
         print('Classification Report:')
         print(metrics.classification_report(test_y, test_pred))  
 
