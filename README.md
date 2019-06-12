@@ -26,7 +26,9 @@ All the work for our CS229 project is the the /notebooks directory.  We left the
 | notebooks/PCA.ipynb | Exploratory work on data to try and understand why we might not be classifying some classescorrectly |
 | notebooks/Neural-Net.ipynb| Legacy NN code that was not included in write-up |
 
+# Notes:
 
+We tagged a snapshot `PROJECT_DEADLINE` of the repo when the results were written up for the report.  This will help verify results of our report.  We later realized some of the cells in the notebook had broken, so we created a branch `fix` that aimed to rememdy these issues.  We were worried that some of our numbers might change due to randomness, so we will leave this on a branch until the project is graded and merge it to trunk at the end of June.
 
 # Overall Results
 
