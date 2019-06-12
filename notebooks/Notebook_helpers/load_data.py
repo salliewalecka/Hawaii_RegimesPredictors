@@ -21,6 +21,7 @@ def load_coral_data(complete=True, CV=True, convert_to_categorical=True):
         train.drop(train.columns[[0, 1]], axis=1, inplace=True)
         val.drop(val.columns[[0, 1]], axis=1, inplace=True)
         test.drop(test.columns[[0, 1]], axis=1, inplace=True)
+
         
     else:
         df = pd.read_csv("../Data/Hawaii_RegimesPredictors.txt", sep="\t", decimal=",")
@@ -39,7 +40,7 @@ def load_coral_data(complete=True, CV=True, convert_to_categorical=True):
         
     if CV:
         train = train.append(val)
-        train, _ = train_test_split(train, test_size=0.0, random_state = 47, shuffle=True)
+        train = train.sample(frac=1).reset_index(drop=True)
         return df, train, test
     
     return df, train, val, test
